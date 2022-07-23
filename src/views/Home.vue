@@ -1,6 +1,6 @@
 <template>
   <v-container class="home">
-
+    <h1>Soy un Home</h1>
   </v-container>
     
 </template>

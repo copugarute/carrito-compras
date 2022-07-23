@@ -1,12 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      
-    </v-app-bar>
+    <nav-bar/>
 
     <v-main>
       <router-view/>
@@ -15,14 +9,23 @@
 </template>
 
 <script>
-
+import NavBar from './components/NavBar.vue';
+import {mapActions} from 'vuex'
 export default {
+  components: { NavBar },
   name: 'App',
 
   data(){
     return{
-      
+
     }
+  },
+  methods:{
+    ...mapActions(['fetchCategories'])
+  },
+  created(){
+    this.fetchCategories()
   }
+  
 };
 </script>
