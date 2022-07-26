@@ -10,15 +10,18 @@
 
         <v-badge
           color="pink lighten-3"
-          :content="cartLength"
-          class="me-5 mt-4"
+          :content="cartCount"
+          class="me-5 mt-2"
+          :value="cartCount"
         >
-          <v-icon>mdi-cart</v-icon>
+          <v-icon
+            @click="redirectTo('CartView')"
+          >mdi-cart</v-icon>
         </v-badge>
         
       </v-app-bar>
 
-      <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-navigation-drawer v-model="drawer" absolute temporary color="pink lighten-4">
         <v-list nav dense>
           <v-list-item-group
             v-model="group"
@@ -54,7 +57,7 @@ export default {
       routes:[
         {icon:'mdi-home', title:'Home',name:'Home'},
         {icon:'mdi-account', title:'Acerca',name:'About'},
-        {icon:'mdi-format-list-bullet', title:'Categorias',name:'Categories'},
+        {icon:'mdi-format-list-bulleted', title:'Categorias',name:'Categories'},
         
       ]
     };
@@ -63,7 +66,7 @@ export default {
     currentRoute(){
         return this.$route.name
     },
-    ...mapGetters(['cartLength'])
+    ...mapGetters(['cartCount'])
   },
   methods:{
         redirectTo(nameRoute){

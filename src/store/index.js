@@ -9,9 +9,21 @@ export default new Vuex.Store({
     cart:[],
   },
   getters:{
-    cartLength(state){
+    cartCount(state){
       return state.cart.length
-    }
+    },
+    totalProduct(state){
+      return state.cart.map(prod =>{
+        let myProd = prod
+        myProd.total = prod.count * prod.price
+        return myProd
+      })
+    },
+    totalCart(state,getters){
+      return getters.totalProduct.reduce((total,prod)=>{
+        return total + prod.total
+      },0)
+    },
   },
   mutations: {
     SET_CATEGORIES(state,categories){
@@ -29,7 +41,25 @@ export default new Vuex.Store({
           }
         })
       }
-    }
+    },
+    ADD_STOCK_PRODUCT(state,idProduct){
+      state.cart.forEach((prod)=>{
+        if(prod.id == idProduct){
+          prod.count+=1
+        }
+      })
+    },
+    REMOVE_STOCK_PRODUCT(state, idProduct){
+      state.cart.forEach((prod)=>{
+        if(prod.id == idProduct && prod.count>1 ){
+          prod.count -=1
+        }
+      })
+    },
+    REMOVE_PRODUCT_CART(state,idProduct){
+      let index = state.cart.findIndex((prod)=> prod.id == idProduct)
+      state.cart.splice(index,1)
+    },
   },
   actions: {
     async fetchCategories({commit}){
@@ -48,7 +78,16 @@ export default new Vuex.Store({
     },
     addProdToCart({commit},product){
       commit('ADD_PROD_TO_CART', product)
-    }
+    },
+    addStockProduct({commit},idProduct){
+      commit('ADD_STOCK_PRODUCT',idProduct)
+    },
+    removeStockProduct({commit},idProduct){
+      commit('REMOVE_STOCK_PRODUCT', idProduct)
+    },
+    removeProductCart({commit}, idProduct){
+      commit('REMOVE_PRODUCT_CART', idProduct)
+    },
   },
   modules: {
   }
