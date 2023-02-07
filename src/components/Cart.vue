@@ -2,7 +2,7 @@
   <v-container>
         <h1 class="text-center pink--text mb-5">Carrito</h1>
     <v-row justify="center">
-        <v-col md="10">
+        <v-col md="12">
             
                 <v-data-table
                     :headers="headers"
