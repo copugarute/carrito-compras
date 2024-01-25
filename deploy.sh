@@ -19,6 +19,6 @@ git commit -m "deploy"
 # Para desplegar nuestra pagina en gh-pages  https://<USERNAME>.github.io/<REPO>
 
 
-git push -f https://github.com/copugarute/carrito-compras.git main
+git push -f https://github.com/copugarute/carrito-compras.git master
 
 cd -
